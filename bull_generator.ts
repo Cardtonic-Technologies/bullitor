@@ -33,7 +33,7 @@ const config = cleanEnv(process.env, {
   LIMITER_DURATION_MS: num({ default: 1000 }),
   REDIS_HOST: str({ default: '127.0.0.1' }),
   REDIS_PASSWORD: str({ default: '' }),
-  REDIS_PORT: port({ default: 6001 }),
+  REDIS_PORT: port({ default: 6379 }),
   CREATE_DELAY_MS: num({ default: 0 }),
   CONCURRENCY: num({ default: 1 }),
 });
@@ -53,14 +53,14 @@ const main = async () => {
     },
   });
 
-  const scheduler = new Bull.QueueScheduler(config.QUEUE, {
-    prefix: config.PREFIX,
-    connection: {
-      host: config.REDIS_HOST,
-      port: config.REDIS_PORT,
-      password: config.REDIS_PASSWORD,
-    },
-  });
+  // const scheduler = new Bull.QueueScheduler(config.QUEUE, {
+  //   prefix: config.PREFIX,
+  //   connection: {
+  //     host: config.REDIS_HOST,
+  //     port: config.REDIS_PORT,
+  //     password: config.REDIS_PASSWORD,
+  //   },
+  // });
 
   if (
     config.ACTION === ACTIONS.PROCESS ||
@@ -122,11 +122,11 @@ const main = async () => {
   }
 
   if (config.ACTION === ACTIONS.REMOVE) {
-    scheduler.on('error', () => {
-      // do nothing
-    });
+    // scheduler.on('error', () => {
+    //   // do nothing
+    // });
     log(`Removing queue`);
-    await scheduler.disconnect();
+    // await scheduler.disconnect();
     await queue.obliterate({ force: true });
     process.exit();
   }

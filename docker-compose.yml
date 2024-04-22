@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  bull-monitor:
-    image: bull-monitor:latest
+  bullitor:
+    image: bullitor:latest
     build:
       context: .
       args:
@@ -14,15 +14,6 @@ services:
     depends_on:
       - redis
     environment:
-      USE_OAUTH2_PROXY: '0'
-      OAUTH2_PROXY_PROVIDER: 'github'
-      OAUTH2_PROXY_CLIENT_ID: ''
-      OAUTH2_PROXY_CLIENT_SECRET: ''
-      OAUTH2_PROXY_REDIRECT_URL: 'http://localhost:3000'
-      OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER: '1'
-      OAUTH2_PROXY_EMAIL_DOMAINS: '*'
-      OAUTH2_PROXY_SCOPE: 'user:email'
-      UI: bull-board
       REDIS_HOST: redis
       REDIS_PORT: 6379
       PORT: 3000
@@ -57,7 +48,7 @@ services:
   redis:
     image: redis:alpine
     ports:
-      - '6001:6379'
+      - '6379:6379'
   smtp:
     image: mailhog/mailhog:latest
     restart: always

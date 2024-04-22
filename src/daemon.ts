@@ -3,7 +3,7 @@ import { ConfigService } from '@app/config';
 import { LoggerService } from '@app/logger';
 import { Monitor } from 'forever-monitor';
 
-const PROCESS_NAME = 'bull-monitor';
+const PROCESS_NAME = 'bullitor';
 
 class Daemon {
   /**

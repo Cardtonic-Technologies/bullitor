@@ -30,7 +30,10 @@ describe('Smoke testing endpoints', () => {
       .expect('local');
   });
 
-  it('/health', () => {
-    return request(app.getHttpServer()).get('/health').expect(200).expect('OK');
+  it('/healthcheck', () => {
+    return request(app.getHttpServer())
+      .get('/healthcheck')
+      .expect(200)
+      .expect('OK');
   });
 });

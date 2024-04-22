@@ -1,14 +1,11 @@
 import { LoggerService } from '@app/logger';
 import { program } from 'commander';
 import { Environments, LOG_LEVELS } from './logger/common';
-import {} from 'stream';
 
+const VERSION = '1.0.0';
 const DEFAULT_CONTEXT = 'http-context';
 const DEFAULT_LOG_LABEL = 'transform-logs';
 const DEFAULT_LOG_LEVEL = LOG_LEVELS.INFO;
-const VERSION = '1.0.0';
-
-// https://oauth2-proxy.github.io/oauth2-proxy/docs/configuration/overview#standard-log-format
 const DEFAULT_REGEX = /.+\s.+\s(?<context>.+:\d+):\s(?<message>.+$)/;
 
 interface ITransformerOptions {
@@ -63,7 +60,6 @@ process.stdin.on('data', (data) => {
         logger.log(parsed.message);
       }
     } catch (err) {
-      //logger.error(err);
       logger.setContext(DEFAULT_CONTEXT);
       logger.log(msg);
     }

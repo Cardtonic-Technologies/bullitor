@@ -1,13 +1,5 @@
 import 'source-map-support/register';
 
-import * as Sentry from '@sentry/node';
-import '@sentry/tracing';
-
-Sentry.init({
-  dsn: process.env.SENTRY_DSN,
-  release: process.env.VERSION,
-});
-
 // eslint-disable-next-line import/order
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -34,4 +26,4 @@ process.on('uncaughtException', (err) => {
   process.exit(1);
 });
 
-bootstrap();
+bootstrap().then((r) => r);

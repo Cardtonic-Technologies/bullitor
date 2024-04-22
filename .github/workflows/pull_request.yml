@@ -66,7 +66,7 @@ jobs:
       - run: npm run ci:build
       - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          IMAGE: 'bull-monitor:latest'
+          IMAGE: 'bullitor:latest'
         run: npx auto shipit -d
 
   test:
@@ -78,23 +78,25 @@ jobs:
       redis:
         # Docker Hub image
         image: redis
-        # Set health checks to wait until redis has started
+        # Set healthcheck checks to wait until redis has started
         options: >-
           --health-cmd "redis-cli ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
         ports:
-          - 6001:6379
+          - "6379:6379"
     steps:
       - uses: actions/checkout@v3
+
       - uses: actions/cache@v3
         with:
           path: ./node_modules
           key: modules-${{ hashFiles('package-lock.json') }}
+
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - if: ${{ github.actor != 'dependabot[bot]' }}
         uses: mattallty/jest-github-action@v1
         with:
@@ -104,6 +106,7 @@ jobs:
       - if: ${{ github.actor == 'dependabot[bot]' }}
         run: npm run test:ci
       - run: npm run test:e2e
+
       - name: unit tests
         uses: paambaati/codeclimate-action@v3.0.0
         env:

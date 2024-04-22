@@ -23,7 +23,7 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Cache node modules
         uses: actions/cache@v3
@@ -47,7 +47,7 @@ jobs:
       - name: Create Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          IMAGE: 'bull-monitor:latest'
+          IMAGE: 'bullitor:latest'
         run: |
           npx auto shipit
 
@@ -56,5 +56,5 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
-          repository: ejhayes/nodejs-bull-monitor
+          repository: ejhayes/nodejs-bullitor
           short-description: 'All in one bull monitoring and reporting utility'

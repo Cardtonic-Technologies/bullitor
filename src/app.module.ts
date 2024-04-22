@@ -1,9 +1,9 @@
+import { HealthcheckModule } from '@app/healthcheck/healthcheck.module';
 import { Module } from '@nestjs/common';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { BullModule } from './bull/bull.module';
 import { ConfigModule } from './config/config.module';
 import { ConfigService } from './config/config.service';
-import { HealthModule } from './health/health.module';
 import { LoggerModule } from './logger';
 import { LOG_LEVELS } from './logger/common';
 import { MetricsModule } from './metrics';
@@ -26,7 +26,7 @@ import { VersionModule } from './version/version.module';
       },
     }),
     ConfigModule,
-    HealthModule,
+    HealthcheckModule,
     MetricsModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
