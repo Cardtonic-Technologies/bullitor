@@ -10,7 +10,9 @@ describe(HealthcheckModule, () => {
       imports: [HealthcheckModule],
     }).compile();
 
-    healthController = moduleRef.get<HealthcheckController>(HealthcheckController);
+    healthController = moduleRef.get<HealthcheckController>(
+      HealthcheckController,
+    );
   });
 
   it('returns healthy status', async () => {
