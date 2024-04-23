@@ -17,7 +17,28 @@ export class BullBoardUi implements IBullUi {
     this._ui = new ExpressAdapter();
     this._ui.setBasePath('/queues');
 
-    this._board = createBullBoard({ queues: [], serverAdapter: this._ui });
+    this._board = createBullBoard({
+      queues: [],
+      serverAdapter: this._ui,
+      options: {
+        uiConfig: {
+          boardTitle:
+            this.configService.config.BULL_BOARD_TITLE.length > 10
+              ? `${this.configService.config.BULL_BOARD_TITLE.slice(0, 10)}...`
+              : this.configService.config.BULL_BOARD_TITLE,
+          boardLogo: {
+            ...(this.configService.config.BULL_BOARD_AVATAR && {
+              path: 'https://breet.app/favicon.png',
+              width: '40%',
+              height: '100%',
+            }),
+            ...(this.configService.config.BULL_BOARD_FAVICON && {
+              favIcon: this.configService.config.BULL_BOARD_FAVICON,
+            }),
+          },
+        },
+      },
+    });
   }
 
   addQueue(queuePrefix: string, queueName: string, queue: Queue) {
