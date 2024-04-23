@@ -119,3 +119,4 @@ web_modules/
 .pnp.*
 
 docker-compose*.yml
+!/dist
