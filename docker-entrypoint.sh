@@ -45,11 +45,16 @@ if [ -s conn_string ]; then
 #  echo $REDIS_HOST
 #  echo $REDIS_PORT
 
+  REDIS_USERNAME=$(sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | awk 'NR==1')
+  REDIS_PASSWORD=$(sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | awk 'NR==2')
+  REDIS_HOST=$(sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | awk 'NR==3')
+  REDIS_PORT=$(sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | awk 'NR==4')
+
   export REDIS_TLS=true
-  export REDIS_USERNAME=$(sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | awk 'NR==1')
-  export REDIS_PASSWORD=$(sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | awk 'NR==2')
-  export REDIS_HOST=$(sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | awk 'NR==3')
-  export REDIS_PORT=$(sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | awk 'NR==4')
+  export REDIS_USERNAME
+  export REDIS_PASSWORD
+  export REDIS_HOST
+  export REDIS_PORT
 
   rm conn_string
 fi
