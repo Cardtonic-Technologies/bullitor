@@ -2,7 +2,10 @@ FROM node:20-alpine as build
 WORKDIR /app
 RUN apk add --no-cache openssh git
 COPY package* ./
+COPY tsconfig* ./
+RUN npm i -g @nestjs/cli
 RUN npm install --omit=dev
+RUN npm run build
 COPY dist ./
 
 FROM node:20-alpine
