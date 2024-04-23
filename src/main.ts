@@ -8,7 +8,6 @@ import { LoggerService } from './logger';
 import { OpenAPIModule } from './openapi/openapi.module';
 
 async function bootstrap() {
-  console.log({ printEnv: process.env });
   const logger = new LoggerService();
   logger.setContext(bootstrap.name);
   const app = await NestFactory.create(AppModule, { logger });
