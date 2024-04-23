@@ -33,11 +33,19 @@ export class ConfigService {
     /**
      * Redis host to fetch queues from
      */
-    REDIS_HOST: str(),
+    REDIS_HOST: str({default: ''}),
+    /**
+     * Redis username (if needed)
+     */
+    REDIS_USERNAME: str({default: ''}),
     /**
      * Redis port to fetch queues from
      */
-    REDIS_PORT: port(),
+    REDIS_PORT: port({default: 6379}),
+    /**
+     * Redis SSL enabled
+     */
+    REDIS_TLS: bool({ default: false }),
     /**
      * Redis password (if needed)
      */
@@ -82,7 +90,7 @@ export class ConfigService {
     /**
      * Version
      */
-    VERSION: str(),
+    VERSION: str({default:'local'}),
   });
 
   get config() {

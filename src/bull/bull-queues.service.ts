@@ -40,8 +40,8 @@ const REDIS_CONFIG_NOTIFY_KEYSPACE_EVENTS_FLAGS = 'A$K';
 export class BullQueuesService implements OnModuleInit, OnModuleDestroy {
   private _initialized = false;
   private readonly _queues: { [queueName: string]: Queue } = {};
-  private readonly _redisMutex = withTimeout(new Mutex(), 10000);
-  private readonly _bullMutex = withTimeout(new Mutex(), 10000);
+  private readonly _redisMutex = withTimeout(new Mutex(), 60000);
+  private readonly _bullMutex = withTimeout(new Mutex(), 60000);
 
   constructor(
     private readonly eventEmitter: TypedEmitter<BullQueuesServiceEvents>,
@@ -113,6 +113,8 @@ export class BullQueuesService implements OnModuleInit, OnModuleDestroy {
             host: this.configService.config.REDIS_HOST,
             port: this.configService.config.REDIS_PORT,
             password: this.configService.config.REDIS_PASSWORD,
+            username: this.configService.config.REDIS_USERNAME,
+            tls: this.configService.config.REDIS_TLS ? {} : undefined,
           },
         });
         this._queues[queueKey].on('error', (err) => {
@@ -334,7 +336,8 @@ export class BullQueuesService implements OnModuleInit, OnModuleDestroy {
         'Redis connection READY! Configuring watchers for BullMQ queues.',
       );
 
-      await this.configureKeyspaceEventNotifications();
+      // does not work for cloud Redis, they mostly don't allow altering instances configs
+      // await this.configureKeyspaceEventNotifications();
 
       const previouslyLoadedQueues = this.getLoadedQueues();
       let newlyLoadedQueues: Array<any> = [];

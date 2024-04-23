@@ -1,11 +1,11 @@
-FROM node:18-alpine as build
+FROM node:20-alpine as build
 WORKDIR /app
 RUN apk add --no-cache openssh git
 COPY package* ./
 RUN npm install --omit=dev
 COPY dist ./
 
-FROM node:18-alpine
+FROM node:20-alpine
 # https://stackoverflow.com/questions/66963068/docker-alpine-executable-binary-not-found-even-if-in-path
 RUN apk add --no-cache libc6-compat curl bash
 ARG BUILD_VERSION
@@ -24,4 +24,6 @@ ENV NODE_ENV="production" \
     VERSION=$BUILD_VERSION
 EXPOSE 3000
 HEALTHCHECK --interval=15s --timeout=30s --start-period=5s --retries=3 CMD curl --fail http://localhost:3000/healthcheck || exit 1
-ENTRYPOINT ["sh", "docker-entrypoint.sh"]
+ENTRYPOINT ["bash", "docker-entrypoint.sh"]
+
+CMD ["node", "daemon.js"]

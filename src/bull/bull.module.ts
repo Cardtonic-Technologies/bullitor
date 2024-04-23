@@ -20,6 +20,10 @@ import { BullMQMetricsFactory } from './bullmq-metrics.factory';
           (client) => {
             return {
               name: client,
+              maxRetriesPerRequest: null,
+              showFriendlyErrorStack: true,
+              tls: configService.config.REDIS_TLS ? {} : undefined,
+              username: configService.config.REDIS_USERNAME,
               host: configService.config.REDIS_HOST,
               password: configService.config.REDIS_PASSWORD,
               port: configService.config.REDIS_PORT,

@@ -122,14 +122,10 @@ const main = async () => {
   }
 
   if (config.ACTION === ACTIONS.REMOVE) {
-    // scheduler.on('error', () => {
-    //   // do nothing
-    // });
     log(`Removing queue`);
-    // await scheduler.disconnect();
     await queue.obliterate({ force: true });
     process.exit();
   }
 };
 
-main();
+main().then(r => r);

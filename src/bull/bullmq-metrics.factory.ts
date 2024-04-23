@@ -194,6 +194,8 @@ export class BullMQMetricsFactory {
         host: this.configService.config.REDIS_HOST,
         port: this.configService.config.REDIS_PORT,
         password: this.configService.config.REDIS_PASSWORD,
+        username: this.configService.config.REDIS_USERNAME,
+        tls: this.configService.config.REDIS_TLS ? {} : undefined,
       },
     });
 

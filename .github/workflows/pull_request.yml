@@ -3,6 +3,7 @@ name: Code Review
 on:
   pull_request:
     types: [opened, synchronize]
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.head_ref }}-pr
@@ -20,7 +21,7 @@ jobs:
           key: modules-${{ hashFiles('package-lock.json') }}
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 20
       - if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
 
@@ -37,7 +38,7 @@ jobs:
           key: modules-${{ hashFiles('package-lock.json') }}
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 20
       - uses: wearerequired/lint-action@v2
         with:
           eslint: true
@@ -46,7 +47,7 @@ jobs:
           prettier_extensions: ts,json,js,yml
           auto_fix: true
           commit_message: 'chore(lint): Fix code style issues with ${linter}'
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.TTT_GITHUB_TOKEN }}
           git_email: 'lint-action@github.com'
 
   build:
@@ -62,10 +63,10 @@ jobs:
           key: modules-${{ hashFiles('package-lock.json') }}
       - uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 20
       - run: npm run ci:build
       - env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TTT_GITHUB_TOKEN }}
           IMAGE: 'bullitor:latest'
         run: npx auto shipit -d
 
@@ -96,18 +97,13 @@ jobs:
 
       - uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 20
       - if: ${{ github.actor != 'dependabot[bot]' }}
         uses: mattallty/jest-github-action@v1
         with:
           test-command: npm run test:ci
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TTT_GITHUB_TOKEN }}
       - if: ${{ github.actor == 'dependabot[bot]' }}
         run: npm run test:ci
       - run: npm run test:e2e
-
-      - name: unit tests
-        uses: paambaati/codeclimate-action@v3.0.0
-        env:
-          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
