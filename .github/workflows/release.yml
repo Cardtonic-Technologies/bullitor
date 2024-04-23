@@ -49,6 +49,8 @@ jobs:
 
       - run: npm ci
 
+      - run: sed -i '/^\/dist/d' .gitignore
+
       - run: npm run build
 
 #      - name: Create Release
