@@ -47,13 +47,13 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
-      - run: npm ci
+#      - run: npm ci
 
 #      - run: sed -i '/^\/dist/d' .gitignore
 #
 #      - run: rm .gitignore
 
-      - run: npm run build
+#      - run: npm run build
 
 #      - name: Create Release
 #        env:
