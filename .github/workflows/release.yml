@@ -49,9 +49,9 @@ jobs:
 
       - run: npm ci
 
-      - run: sed -i '/^\/dist/d' .gitignore
-
-      - run: rm .gitignore
+#      - run: sed -i '/^\/dist/d' .gitignore
+#
+#      - run: rm .gitignore
 
       - run: npm run build
 
