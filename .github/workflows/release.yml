@@ -47,21 +47,6 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
-#      - run: npm ci
-
-#      - run: sed -i '/^\/dist/d' .gitignore
-#
-#      - run: rm .gitignore
-
-#      - run: npm run build
-
-#      - name: Create Release
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          IMAGE: 'bullitor:latest'
-#        run: |
-#          npx auto shipit
-
       - name: Get TAG
         id: get_tag
         run: echo TAG=${GITHUB_REF#refs/tags/} >> $GITHUB_ENV
