@@ -27,6 +27,18 @@ export class ConfigService {
      */
     REDIS_CONN_STRING: str({ default: '' }),
     /**
+     * Bull Board Title
+     */
+    BULL_BOARD_TITLE: str({ default: 'BULL DASHBOARD' }),
+    /**
+     * Bull Board Avatar URL
+     */
+    BULL_BOARD_AVATAR: str({ default: '' }),
+    /**
+     * Bull Board Favicon URL
+     */
+    BULL_BOARD_FAVICON: str({ default: '' }),
+    /**
      * Redis database number
      */
     REDIS_DB: num({ default: 0 }),
