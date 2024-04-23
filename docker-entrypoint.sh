@@ -29,7 +29,7 @@ file_env 'REDIS_PASSWORD'
 file_env 'REDIS_CONN_STRING'
 
 # if $REDIS_CONN_STRING exists split the env out and make the connection a secure one (TLS)
-echo $REDIS_CONN_STRING >conn_string
+echo "$REDIS_CONN_STRING" >conn_string
 cat conn_string
 if [ -s conn_string ]; then
 #  i=0
