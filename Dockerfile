@@ -3,7 +3,7 @@ WORKDIR /app
 RUN apk add --no-cache openssh git
 COPY package* ./
 RUN npm install --omit=dev
-COPY dist ./
+#COPY dist ./
 
 FROM node:20-alpine
 # https://stackoverflow.com/questions/66963068/docker-alpine-executable-binary-not-found-even-if-in-path
@@ -16,6 +16,7 @@ ARG PORT=3000
 WORKDIR /app
 COPY --from=build /app ./
 COPY docker-entrypoint.sh .
+RUN npm run build
 ENV NODE_ENV="production" \
     ALTERNATE_PORT=$ALTERNATE_PORT \
     PORT=$PORT \
