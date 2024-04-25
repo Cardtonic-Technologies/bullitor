@@ -29,8 +29,7 @@ file_env 'REDIS_PASSWORD'
 file_env 'REDIS_CONN_STRING'
 
 # if $REDIS_CONN_STRING exists split the env out and make the connection a secure one (TLS)
-echo "$REDIS_CONN_STRING" >conn_string
-if [ -s conn_string ]; then
+if [ "$REDIS_CONN_STRING" != "" ]; then
 #  i=0
 #  sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | while IFS= read -r line; do echo $line; done
 #  sed 's/[://@]/\n/g' <<<"$REDIS_CONN_STRING" | tail -n +4 | while ((i++)); IFS= read -r line; do export ${ENV_ARR[i]}=$line; done
@@ -54,8 +53,6 @@ if [ -s conn_string ]; then
   export REDIS_PASSWORD
   export REDIS_HOST
   export REDIS_PORT
-
-  rm conn_string
 fi
 
 # enable prod logging if NODE_ENV is production
