@@ -28,7 +28,7 @@ export class BullBoardUi implements IBullUi {
               : this.configService.config.BULL_BOARD_TITLE,
           boardLogo: {
             ...(this.configService.config.BULL_BOARD_AVATAR && {
-              path: 'https://breet.app/favicon.png',
+              path: this.configService.config.BULL_BOARD_AVATAR,
               width: '40%',
               height: '100%',
             }),
