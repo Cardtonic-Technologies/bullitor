@@ -33,7 +33,9 @@ export class BullBoardUi implements IBullUi {
               height: '100%',
             }),
             ...(this.configService.config.BULL_BOARD_FAVICON && {
-              favIcon: this.configService.config.BULL_BOARD_FAVICON,
+              favIcon: {
+                default: this.configService.config.BULL_BOARD_FAVICON,
+              },
             }),
           },
         },
