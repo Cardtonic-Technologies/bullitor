@@ -15,7 +15,7 @@ export class BullBoardUi implements IBullUi {
     private readonly configService: ConfigService,
   ) {
     this._ui = new ExpressAdapter();
-    this._ui.setBasePath('/queues');
+    this._ui.setBasePath(this.configService.config.BULL_URL_PATH);
 
     this._board = createBullBoard({
       queues: [],
@@ -29,8 +29,8 @@ export class BullBoardUi implements IBullUi {
           boardLogo: {
             ...(this.configService.config.BULL_BOARD_AVATAR && {
               path: this.configService.config.BULL_BOARD_AVATAR,
-              width: '40%',
-              height: '100%',
+              width: 'vw',
+              height: 'vh',
             }),
             ...(this.configService.config.BULL_BOARD_FAVICON && {
               favIcon: {
