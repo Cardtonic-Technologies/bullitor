@@ -26,7 +26,10 @@ file_env() {
 file_env 'REDIS_HOST'
 file_env 'REDIS_USERNAME'
 file_env 'REDIS_PASSWORD'
+file_env 'BULL_COOKIE_NAME'
 file_env 'REDIS_CONN_STRING'
+file_env 'BULL_BOARD_USERNAME'
+file_env 'BULL_BOARD_PASSWORD'
 
 # if $REDIS_CONN_STRING exists split the env out and make the connection a secure one (TLS)
 if [ "$REDIS_CONN_STRING" != "" ]; then
