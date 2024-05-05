@@ -1,3 +1,5 @@
+import { AuthMiddleware } from '@app/auth/auth.middleware';
+import { AuthModule } from '@app/auth/auth.module';
 import { ConfigModule } from '@app/config/config.module';
 import { ConfigService } from '@app/config/config.service';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
@@ -11,6 +13,7 @@ import { BullMQMetricsFactory } from './bullmq-metrics.factory';
 
 @Module({
   imports: [
+    AuthModule,
     ConfigModule,
     RedisModule.forRootAsync({
       imports: [ConfigModule],
@@ -44,7 +47,10 @@ import { BullMQMetricsFactory } from './bullmq-metrics.factory';
   ],
 })
 export class BullModule implements NestModule {
+  constructor(private readonly configService: ConfigService) {}
   configure(consumer: MiddlewareConsumer): MiddlewareConsumer | void {
-    consumer.apply(BullDashboardMiddleware).forRoutes('queues');
+    consumer
+      .apply(AuthMiddleware, BullDashboardMiddleware)
+      .forRoutes(this.configService.config.BULL_URL_PATH);
   }
 }

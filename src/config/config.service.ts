@@ -27,6 +27,26 @@ export class ConfigService {
      */
     REDIS_CONN_STRING: str({ default: '' }),
     /**
+     * Bull Cookie Name
+     */
+    BULL_COOKIE_NAME: str({ default: 'THE_REAL_BULL_COOKIE_NAME' }),
+    /**
+     * Bull Route Path
+     */
+    BULL_URL_PATH: str({ default: '/queues' }),
+    /**
+     * Enable Bull Auth
+     */
+    BULL_ENABLE_AUTH: bool({ default: false }),
+    /**
+     * Bull Board Username
+     */
+    BULL_BOARD_USERNAME: str({ default: 'admin' }),
+    /**
+     * Bull Board Password
+     */
+    BULL_BOARD_PASSWORD: str({ default: 'admin' }),
+    /**
      * Bull Board Title
      */
     BULL_BOARD_TITLE: str({ default: 'BULL DASHBOARD' }),
