@@ -48,7 +48,7 @@ export class LocalAuthGuard extends AuthGuard('local') {
       //   return true;
       // }
 
-      response.setHeader('location', 'login?invalid=true');
+      response.setHeader('location', '/auth/login?invalid=true');
       throw new FoundException('redirecting you to login...');
     }
     return user;

@@ -32,11 +32,12 @@ export class BullBoardUi implements IBullUi {
               width: 'vw',
               height: 'vh',
             }),
-            ...(this.configService.config.BULL_BOARD_FAVICON && {
-              favIcon: {
-                default: this.configService.config.BULL_BOARD_FAVICON,
-              },
-            }),
+          },
+          favIcon: {
+            default:
+              this.configService.config.BULL_BOARD_FAVICON ||
+              'static/images/logo.svg',
+            alternative: 'static/favicon-32x32.png',
           },
         },
       },

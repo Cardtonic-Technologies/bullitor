@@ -4,6 +4,7 @@ RUN apk add --no-cache openssh git
 COPY package* ./
 COPY tsconfig* ./
 COPY src ./src
+COPY views ./views
 RUN npm install --omit=dev
 RUN sed -i 's/dist//' tsconfig.json
 RUN npm run build
