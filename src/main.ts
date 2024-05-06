@@ -26,7 +26,8 @@ async function bootstrap() {
       resave: false,
       saveUninitialized: false,
       cookie: { maxAge: 1000 * 60 * 60 * 24 },
-      secret: configService.config.BULL_COOKIE_NAME,
+      secret:
+        configService.config.BULL_COOKIE_NAME || 'THE_REAL_BULL_COOKIE_NAME',
     }),
   );
 
