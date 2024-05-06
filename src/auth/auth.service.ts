@@ -11,8 +11,8 @@ export class AuthService {
 
   validateAuth(username: string, password: string) {
     if (
-      username === this.configService.config.BULL_BOARD_USERNAME &&
-      password === this.configService.config.BULL_BOARD_PASSWORD
+      username === (this.configService.config.BULL_BOARD_USERNAME || 'admin') &&
+      password === (this.configService.config.BULL_BOARD_PASSWORD || 'admin')
     ) {
       return { user: 'bull-board' };
     }

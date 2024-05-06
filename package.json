@@ -52,7 +52,7 @@
     "bullmq": "^5.7.4",
     "commander": "^9.3.0",
     "ejs": "^3.1.10",
-    "envalid": "^7.3.1",
+    "envalid": "^8.0.0",
     "express-session": "^1.18.0",
     "forever-monitor": "^3.0.3",
     "nestjs-redis": "1.2.6",
