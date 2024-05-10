@@ -29,8 +29,8 @@ export class BullBoardUi implements IBullUi {
           boardLogo: {
             ...(this.configService.config.BULL_BOARD_AVATAR && {
               path: this.configService.config.BULL_BOARD_AVATAR,
-              width: 'vw',
-              height: 'vh',
+              width: '40%',
+              height: '100%',
             }),
           },
           favIcon: {
