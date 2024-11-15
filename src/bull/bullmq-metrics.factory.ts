@@ -252,7 +252,7 @@ export class BullMQMetricsFactory {
     queueEvents.on('delayed', async (event) => {
       const job = await queue.getJob(event.jobId);
       const jobLabels = {
-        [LABEL_NAMES.JOB_NAME]: job.name,
+        [LABEL_NAMES.JOB_NAME]: job?.name,
         ...labels,
       };
       this.jobs_delayed.inc(jobLabels, 1);
